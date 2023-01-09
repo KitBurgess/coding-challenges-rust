@@ -21,7 +21,39 @@ fn main() {
     //     vec![-1, 1, 1],
     // ));
 
-    println!("{:?}", Solution::max_area(vec![1, 8, 6, 2, 5, 4, 8, 3, 7]));
+    // println!("{:?}", Solution::max_area(vec![1, 8, 6, 2, 5, 4, 8, 3, 7]));
 
+
+    Solution::game_of_life(
+        &mut vec![
+            vec![1, 1],
+            vec![1, 0],
+        ]
+    );
+
+    Solution::game_of_life(
+        &mut vec![
+            vec![1, 1],
+            vec![1, 0],
+        ]
+    );
+
+    Solution::game_of_life(
+        &mut vec![
+            vec![0, 1, 0],
+            vec![0, 0, 1],
+            vec![1, 1, 1],
+            vec![0, 0, 0],
+        ]
+    );
+    //
+    Solution::game_of_life(
+        &mut vec![
+            vec![0, 1, 0],
+            vec![0, 0, 1],
+            vec![1, 1, 1],
+            vec![0, 0, 0],
+        ]
+    );
 }
 

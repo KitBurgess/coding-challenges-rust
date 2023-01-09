@@ -95,4 +95,51 @@ impl Solution {
 
         water as i32
     }
+
+    pub fn game_of_life(board: &mut Vec<Vec<i32>>) {
+        let frozen_board = board.clone();
+
+        let directions: Vec<(i32, i32)> = vec![
+            (-1, -1),
+            (-1, 0),
+            (-1, 1),
+            (0, -1),
+            (0, 1),
+            (1, -1),
+            (1, 0),
+            (1, 1),
+        ];
+
+        let board_length = board.len();
+        let board_width = board[0].len();
+
+        for i in 0..board_length {
+            for j in 0..board_width {
+
+                let score: i32 = directions
+                    .iter()
+                    .map(|(a, b)| (a + i as i32, b + j as i32))
+                    .filter(|(a, b)| *a >= 0 && *b >= 0 && *a < board_length as i32 && *b < board_width as i32)
+                    .map(|(a, b)| frozen_board[a as usize][b as usize])
+                    .sum();
+
+                let alive = frozen_board[i][j];
+
+                let new = if alive == 1 {
+                    match score {
+                        2..=3 => 1,
+                        _ => 0
+                    }
+                } else {
+                    match score {
+                        3..=3 => 1,
+                        _ => 0
+                    }
+                };
+
+                board[i][j] = new;
+            }
+        }
+        // println!("{:?}", board);
+    }
 }
