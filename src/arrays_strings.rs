@@ -1,5 +1,4 @@
 use std::collections::{HashMap, VecDeque};
-use std::env::join_paths;
 
 use crate::utils::Utils;
 
@@ -115,7 +114,6 @@ impl Solution {
 
         for i in 0..board_length {
             for j in 0..board_width {
-
                 let score: i32 = directions
                     .iter()
                     .map(|(a, b)| (a + i as i32, b + j as i32))
@@ -141,5 +139,105 @@ impl Solution {
             }
         }
         // println!("{:?}", board);
+    }
+    ///
+    /// [0,1,3] -> 2
+    pub fn missing_number(nums: Vec<i32>) -> i32 {
+        let n = nums.len() as i32;
+        (((n + 1) * n) / 2) - nums.iter().sum::<i32>()
+    }
+
+    /// https://leetcode.com/problems/find-the-duplicate-number/
+    pub fn find_duplicate(nums: Vec<i32>) -> i32 {
+        let mut seen: Vec<bool> = std::iter::repeat(false).take(nums.len()).collect();
+
+        for n in nums {
+            if seen[n as usize] == true {
+                return n;
+            } else {
+                seen[n as usize] = true
+            }
+        }
+
+        println!("FAILED");
+        return -1;
+    }
+
+    /// https://leetcode.com/explore/interview/card/top-interview-questions-hard/116/array-and-strings/832/
+    ///Given an unsorted integer array nums, return the smallest missing positive integer.
+    ///
+    /// You must implement an algorithm that runs in O(n) time and uses constant extra space.
+    ///
+    ///
+    ///
+    /// Example 1:
+    ///
+    /// Input: nums = [1,2,0]
+    /// Output: 3
+    /// Explanation: The numbers in the range [1,2] are all in the array.
+    /// Example 2:
+    ///
+    /// Input: nums = [3,4,-1,1]
+    /// Output: 2
+    /// Explanation: 1 is in the array but 2 is missing.
+    /// Example 3:
+    ///
+    /// Input: nums = [7,8,9,11,12]
+    /// Output: 1
+    /// Explanation: The smallest positive integer 1 is missing.
+    pub fn first_missing_positive(nums: Vec<i32>) -> i32 {
+        use std::iter::repeat;
+        let max_num = *nums.iter().max().unwrap();
+        let array_size = (nums.len() as i32).max(max_num + 1);
+        let mut seen: Vec<bool> = repeat(false).take(array_size as usize).collect();
+
+        for &n in &nums {
+            if n >= 0 {
+                seen[n as usize] = true;
+            }
+        }
+        seen[0] = true;
+
+        seen.iter().position(|x| !*x).unwrap_or(*&nums.len() + 1) as i32
+    }
+
+    /// https://leetcode.com/explore/interview/card/top-interview-questions-hard/116/array-and-strings/833/
+    /// Generate a set then traverse counting the longest consecutive run
+    pub fn longest_consecutive_imperative(nums: Vec<i32>) -> i32 {
+        let mut set: std::collections::HashSet<i32> = nums.into_iter().collect();
+
+        let mut current = 0;
+        let mut longest = 0;
+
+        for n in &set {
+            if set.contains(&(n - 1)) {
+                continue;
+            }
+
+            current = 1;
+
+            let mut up = n + 1;
+            while set.contains(&up) {
+                current += 1;
+                up += 1;
+            }
+
+            longest = longest.max(current);
+        }
+        longest
+    }
+
+    /// https://leetcode.com/explore/interview/card/top-interview-questions-hard/116/array-and-strings/833/
+    /// Generate a set then traverse counting the longest consecutive run
+    pub fn longest_consecutive_functional(nums: Vec<i32>) -> i32 {
+        use std::collections::HashSet;
+
+        let seq: HashSet<i32> = nums.into_iter().collect::<HashSet<i32>>();
+
+        seq.iter()
+            .filter(|&&x| x != i32::MIN && !seq.contains(&(x - 1)))
+            .map(|&x| (x..=i32::MAX).take_while(|x| seq.contains(x)).count())
+            .max()
+            .unwrap_or(0) as i32
     }
 }
