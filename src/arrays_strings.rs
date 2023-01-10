@@ -326,4 +326,17 @@ impl Solution {
         nums.dedup();
         nums.len() as i32
     }
+
+    pub fn max_profit(prices: Vec<i32>) -> i32 {
+        prices.windows(2)
+            .map(|x| i32::max((x[1] - x[0]), 0))
+            .sum()
+    }
+
+    /// Input  [1,2,3,4,5,6,7], k= 3.
+    /// Output [5,6,7,1,2,3,4]
+    pub fn rotate(nums: &mut Vec<i32>, k: i32) {
+        let len = k as usize % nums.len();
+        nums.rotate_right(len);
+    }
 }

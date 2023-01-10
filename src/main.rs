@@ -78,11 +78,15 @@ fn main() {
     // println!("{:?}", Solution::max_sliding_window(vec![1, 3, -1, -3, 5, 3, 6, 7], 3));
 
 
-    Solution::move_zeroes(&mut vec![0, 1, 0, 3, 12]);
-    Solution::move_zeroes_stdlib(&mut vec![0, 1, 0, 3, 12]);
-    println!("Done");
-    println!("{:?}", Solution::remove_duplicates(&mut vec![1, 1, 2]));
-    println!("{:?}", Solution::remove_duplicates(&mut vec![0, 0, 1, 1, 1, 2, 2, 3, 3, 4]));
+    // Solution::move_zeroes(&mut vec![0, 1, 0, 3, 12]);
+    // Solution::move_zeroes_stdlib(&mut vec![0, 1, 0, 3, 12]);
+    // println!("Done");
+    // println!("{:?}", Solution::remove_duplicates(&mut vec![1, 1, 2]));
+    // println!("{:?}", Solution::remove_duplicates(&mut vec![0, 0, 1, 1, 1, 2, 2, 3, 3, 4]));
+    println!("{:?}", Solution::max_profit(vec![7, 1, 5, 3, 6, 4]));
+    println!("{:?}", Solution::max_profit(vec![1, 2, 3, 4, 5]));
+    println!("{:?}", Solution::max_profit(vec![7, 6, 4, 3, 1]));
+    println!("{:?}", Solution::rotate(&mut vec![1, 2, 3, 4, 5, 6, 7], 3));
 }
 
 
