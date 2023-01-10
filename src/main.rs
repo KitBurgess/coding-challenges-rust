@@ -81,8 +81,10 @@ fn main() {
     Solution::move_zeroes(&mut vec![0, 1, 0, 3, 12]);
     Solution::move_zeroes_stdlib(&mut vec![0, 1, 0, 3, 12]);
     println!("Done");
-    // Solution::move_zeroes(&mut vec![1, 0, 0, 3, 12]);
+    println!("{:?}", Solution::remove_duplicates(&mut vec![1, 1, 2]));
+    println!("{:?}", Solution::remove_duplicates(&mut vec![0, 0, 1, 1, 1, 2, 2, 3, 3, 4]));
 }
+
 
 fn timeit<F: Fn() -> T, T>(f: F) {
     let start = SystemTime::now();

@@ -257,7 +257,7 @@ impl Solution {
         for n in nums {
             deq.push_front(n);
 
-            let mut popped  = i32::MIN;
+            let mut popped = i32::MIN;
             if deq.len() as i32 > k {
                 popped = deq.pop_back().unwrap();
             }
@@ -304,5 +304,26 @@ impl Solution {
         let len = nums.len();
         nums.retain(|x| *x != 0);
         nums.resize(len, 0);
+    }
+    /// Input: nums = [1,1,2]
+    /// Output: 2, nums = [1,2,_]
+    pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
+        let mut last_non_duplicate_index = 0;
+
+        for i in 0..nums.len() {
+            if nums[i] != nums[last_non_duplicate_index] {
+                last_non_duplicate_index += 1;
+                nums[last_non_duplicate_index] = nums[i]
+            }
+        }
+
+        println!("{:?}", nums);
+        (last_non_duplicate_index + 1) as i32
+    }
+
+    /// Same as above but cheating with stdlib
+    pub fn remove_duplicates_stdlib(nums: &mut Vec<i32>) -> i32 {
+        nums.dedup();
+        nums.len() as i32
     }
 }
