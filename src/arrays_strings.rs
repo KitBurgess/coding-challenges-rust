@@ -240,4 +240,47 @@ impl Solution {
             .max()
             .unwrap_or(0) as i32
     }
+
+    pub fn max_sliding_window_functional(nums: Vec<i32>, k: i32) -> Vec<i32> {
+        nums.windows(k as usize)
+            .map(|window| *window.iter().max().unwrap())
+            .collect()
+    }
+    pub fn max_sliding_window(nums: Vec<i32>, k: i32) -> Vec<i32> {
+        use std::collections::VecDeque;
+        let mut deq: VecDeque<i32> = VecDeque::with_capacity(k as usize);
+        let mut maxes: Vec<i32> = Vec::new();
+
+        let mut rolling_max = i32::MIN;
+
+        for n in nums {
+            deq.push_front(n);
+
+            let mut popped  = i32::MIN;
+            if deq.len() as i32 > k {
+                popped = deq.pop_back().unwrap();
+            }
+
+            // println!("Popped: {popped}, rolling_max: {rolling_max}, n: {n}");
+            if deq.len() as i32 == k {
+                // n, rolling_max, popped
+                if n > rolling_max {
+                    rolling_max = n
+                } else if popped < n && n < rolling_max {
+                    // If n is less than the old rolling_max
+                    // and the old maximum wasn't popped off the end then
+                    // there's no need to compute a new rolling_max
+                } else if n < rolling_max && popped < rolling_max {
+                    // also no need to update
+                } else {
+                    rolling_max = n.max(*deq.iter().max().unwrap());
+                }
+                maxes.push(rolling_max);
+            }
+        }
+        maxes
+    }
+    pub fn plus_one(digits: Vec<i32>) -> Vec<i32> {
+
+    }
 }
