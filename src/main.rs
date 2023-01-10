@@ -74,9 +74,14 @@ fn main() {
     // println!("{}", Solution::longest_consecutive_functional(vec![0, 1, 2, 4, 8, 5, 6, 7, 9, 3, 55, 88, 77, 99, 999999999]));
 
 
-    println!("{:?}", Solution::max_sliding_window_functional(vec![1, 3, -1, -3, 5, 3, 6, 7], 3));
-    println!("{:?}", Solution::max_sliding_window(vec![1, 3, -1, -3, 5, 3, 6, 7], 3));
+    // println!("{:?}", Solution::max_sliding_window_functional(vec![1, 3, -1, -3, 5, 3, 6, 7], 3));
+    // println!("{:?}", Solution::max_sliding_window(vec![1, 3, -1, -3, 5, 3, 6, 7], 3));
 
+
+    Solution::move_zeroes(&mut vec![0, 1, 0, 3, 12]);
+    Solution::move_zeroes_stdlib(&mut vec![0, 1, 0, 3, 12]);
+    println!("Done");
+    // Solution::move_zeroes(&mut vec![1, 0, 0, 3, 12]);
 }
 
 fn timeit<F: Fn() -> T, T>(f: F) {

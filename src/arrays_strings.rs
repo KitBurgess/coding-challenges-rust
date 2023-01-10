@@ -246,6 +246,7 @@ impl Solution {
             .map(|window| *window.iter().max().unwrap())
             .collect()
     }
+
     pub fn max_sliding_window(nums: Vec<i32>, k: i32) -> Vec<i32> {
         use std::collections::VecDeque;
         let mut deq: VecDeque<i32> = VecDeque::with_capacity(k as usize);
@@ -280,7 +281,28 @@ impl Solution {
         }
         maxes
     }
-    pub fn plus_one(digits: Vec<i32>) -> Vec<i32> {
 
+    /// [0,1,0,3,12] -> [1,3,12,0,0]
+    /// [1,2,0,4,0,5] -> [1,2,4,5,0,0]
+    pub fn move_zeroes(nums: &mut Vec<i32>) {
+        // walk along finding non zero numbers
+        // swap non-zero number position after last non-zero
+        // done.
+
+        let mut last_non_zero = 0;
+
+        for i in 0..nums.len() {
+            if nums[i] != 0 {
+                nums.swap(i, last_non_zero);
+                last_non_zero += 1;
+            }
+        }
+    }
+
+    /// Same as above but cheat using the standard library
+    pub fn move_zeroes_stdlib(nums: &mut Vec<i32>) {
+        let len = nums.len();
+        nums.retain(|x| *x != 0);
+        nums.resize(len, 0);
     }
 }
