@@ -340,10 +340,14 @@ impl Solution {
         nums.rotate_right(len);
     }
 
+    /// https://leetcode.com/problems/single-number/description/
+    /// Find the only single number in an array
     pub fn single_number_functional(nums: Vec<i32>) -> i32 {
         nums.into_iter().reduce(std::ops::BitXor::bitxor).unwrap()
     }
 
+    /// https://leetcode.com/problems/single-number/description/
+    /// Find the only single number in an array
     pub fn single_number(nums: Vec<i32>) -> i32 {
         let mut xor = 0;
 
