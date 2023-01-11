@@ -1,4 +1,4 @@
-use std::collections::{HashMap, VecDeque};
+use std::collections::{HashMap, HashSet, VecDeque};
 
 use crate::utils::Utils;
 
@@ -338,5 +338,18 @@ impl Solution {
     pub fn rotate(nums: &mut Vec<i32>, k: i32) {
         let len = k as usize % nums.len();
         nums.rotate_right(len);
+    }
+
+    pub fn single_number_functional(nums: Vec<i32>) -> i32 {
+        nums.into_iter().reduce(std::ops::BitXor::bitxor).unwrap()
+    }
+
+    pub fn single_number(nums: Vec<i32>) -> i32 {
+        let mut xor = 0;
+
+        for n in nums {
+            xor ^= n;
+        }
+        xor
     }
 }
